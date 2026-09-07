@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\FriendshipController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -35,6 +36,8 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/user_tags', [UserTagController::class, 'store'])->name('user_tags.store');
     Route::delete('/user_tags/{userTag}', [UserTagController::class, 'destroy'])->name('user_tags.destroy');
+
+    Route::resource('/albums', AlbumController::class);
 });
 
 require __DIR__.'/auth.php';
