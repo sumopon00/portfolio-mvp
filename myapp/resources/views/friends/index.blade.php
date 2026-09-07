@@ -31,6 +31,17 @@
             @else
                 <p>{{ $friend->requester->name }}</p>
             @endif
+
+            @php
+                  $friendId = $friend->requester_id == auth()->id() ? $friend->receiver_id : $friend->requester_id;
+                  $userTags = \App\Models\UserTag::where('user_id', auth()->id())
+                                                 ->where('friend_id', $friendId)
+                                                 ->get();
+            @endphp
+
+            @foreach ($userTags as $userTag)
+                  <p>{{ $userTag->tag->name }}</p>
+            @endforeach
             
             <form action="{{ route('user_tags.store') }}" method="POST">
                   @csrf

@@ -9,6 +9,15 @@ class UserTagController extends Controller
 {
     public function store(Request $request)
     {
+        $exists = Usertag::where('user_id', auth()->id())
+                         ->where('friend_id', $request->friend_id)
+                         ->where('tag_id', $request->tag_id)
+                         ->exists();
+
+        if($exists) {
+            return redirect()->route('friends.index');
+        }
+
         UserTag::create([
             'user_id' => auth()->id(),
             'friend_id' => $request->friend_id,
