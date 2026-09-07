@@ -15,12 +15,14 @@
             <p>{{ $post->created_at }}</p>
       </div>
 
-      <a href="{{ route('posts.edit', $post->id) }}">編集</a>
+      @if ($post->user_id == auth()->id())
+          <a href="{{ route('posts.edit', $post->id) }}">編集</a>
 
-      <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
-            @csrf
-            @method('DELETE')
-            <button type="submit">削除</button>
-      </form>
+            <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
+                  @csrf
+                  @method('DELETE')
+                  <button type="submit">削除</button>
+            </form>
+      @endif
 </body>
 </html>

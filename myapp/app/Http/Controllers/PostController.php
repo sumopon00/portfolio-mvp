@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Friendship;
 use App\Models\Post;
+use App\Models\PostTag;
+use App\Models\UserTag;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -12,7 +15,36 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $friendships = Friendship::where(function($query) {
+            $query->where('requester_id', auth()->id())
+                  ->orWhere('receiver_id', auth()->id());
+        })
+        ->where('status', 'accepted')
+        ->get();
+
+        $friendIds = $friendships->map(function($friendship) {
+            return $friendship->requester_id == auth()->id() 
+                ? $friendship->receiver_id 
+                : $friendship->requester_id;
+        });
+
+        $myTagIds = UserTag::where('friend_id', auth()->id())
+                           ->pluck('tag_id');
+
+        $posts = Post::where('user_id', auth()->id())
+                     ->orWhere(function($query) use ($friendIds) {
+                        $query->whereIn('user_id', $friendIds)
+                              ->where('visibility', 'all');
+                     })
+                     ->orWhere(function($query) use ($friendIds, $myTagIds) {
+                        $query->whereIn('user_id', $friendIds)
+                              ->where('visibility', 'tags')
+                              ->whereIn('id',
+                                PostTag::whereIn('tag_id', $myTagIds)->pluck('post_id')
+                                );
+                     })
+                     ->get();
+    
         return view('posts.index', compact('posts'));
     }
 
@@ -58,6 +90,10 @@ class PostController extends Controller
     {
         $post = Post::find($id);
 
+        if ($post->user_id !== auth()->id()) {
+            return redirect()->route('posts.index');
+        }
+
         return view('posts.edit', compact('post'));
     }
 
@@ -67,6 +103,10 @@ class PostController extends Controller
     public function update(Request $request, string $id)
     {
         $post = Post::find($id);
+
+        if ($post->user_id !== auth()->id()) {
+            return redirect()->route('posts.index');
+        }
 
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('posts', 'public');
@@ -86,6 +126,10 @@ class PostController extends Controller
     public function destroy(string $id)
     {
         $post = Post::find($id);
+
+        if ($post->user_id !== auth()->id()) {
+            return redirect()->route('posts.index');
+        }
 
         $post->delete();
 

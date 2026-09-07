@@ -11,6 +11,7 @@
 
       @foreach ($posts as $post)
             <div class="">
+                  <p>{{ $post->user->name }}</p>
                   <img src="{{ asset('storage/' . $post->image_path) }}" width="300">
                   <p>{{ $post->caption }}</p>
                   <p>{{ $post->created_at }}</p>

@@ -15,4 +15,8 @@ class Post extends Model
         'caption',
         'visibility',
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
