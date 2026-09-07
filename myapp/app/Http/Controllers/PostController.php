@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Album;
+use App\Models\AlbumPost;
 use App\Models\Friendship;
 use App\Models\Post;
 use App\Models\PostTag;
@@ -53,7 +55,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        $albums = Album::where('user_id', auth()->id())->get();
+        return view('posts.create', compact('albums'));
     }
 
     /**
@@ -63,12 +66,19 @@ class PostController extends Controller
     {
         $imagePath = $request->file('image')->store('posts', 'public');
 
-        Post::create([
+        $post = Post::create([
             'user_id' => auth()->id(),
             'image_path' => $imagePath,
             'caption' => $request->caption,
             'visibility' => $request->visibility,
         ]);
+
+        if($request->album_id) {
+            AlbumPost::create([
+                'album_id' => $request->album_id,
+                'post_id' => $post->id,
+            ]);
+        }
 
         return redirect()->route('posts.index');
     }
