@@ -38,6 +38,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/user_tags/{userTag}', [UserTagController::class, 'destroy'])->name('user_tags.destroy');
 
     Route::resource('/albums', AlbumController::class);
+    Route::get('/albums/{album}/members', [AlbumController::class, 'addMember'])->name('albums.members');
+    Route::post('/albums/{album}/members', [AlbumController::class, 'storeMember'])->name('albums.members.store');
 });
 
 require __DIR__.'/auth.php';

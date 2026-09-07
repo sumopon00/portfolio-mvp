@@ -25,7 +25,7 @@
             <div class="">
                   <p>{{ $friendAlbum->name }}</p>
                   <p>{{ $friendAlbum->created_at }}</p>
-                  <a href="{{ route('albums.show', $myAlbum->id) }}">アルバム詳細</a>
+                  <a href="{{ route('albums.show', $friendAlbum->id) }}">アルバム詳細</a>
             </div>
       @endforeach
 </body>

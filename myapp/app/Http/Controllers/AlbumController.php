@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Album;
 use App\Models\AlbumMember;
 use App\Models\AlbumPost;
+use App\Models\Friendship;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -28,17 +29,40 @@ class AlbumController extends Controller
     }
 
     public function store(Request $request) {
-        Album::create([
+        $album = Album::create([
             'user_id' => auth()->id(),
             'name' => $request->name,
             'is_shared' => $request->is_shared,
         ]);
 
         if($request->is_shared) {
-            return redirect()->route(('albums.index'));
+            return redirect()->route('albums.members', $album->id);
         } else {
             return redirect()->route(('albums.index'));
         }
+    }
+
+    public function addMember(string $id)
+    {
+        $album = Album::find($id);
+        $friends = Friendship::where(function($query) {
+            $query->where('requester_id', auth()->id())
+                  ->orWhere('receiver_id', auth()->id());
+        })
+        ->where('status', 'accepted')
+        ->get();
+
+        return view('albums.addMember', compact('album', 'friends'));
+    }
+
+    public function storeMember(Request $request, string $id)
+    {
+        AlbumMember::create([
+            'album_id' => $id,
+            'user_id' => $request->friends,
+        ]);
+
+        return redirect()->route('albums.show', $id);
     }
 
     public function show(string $id)
