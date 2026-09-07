@@ -14,7 +14,9 @@
                   <img src="{{ asset('storage/' . $post->image_path) }}" width="300">
                   <p>{{ $post->caption }}</p>
                   <p>{{ $post->created_at }}</p>
-            </div>          
+            </div>
+
+            <a href="{{ route('posts.show', $post->id) }}">詳細を見る</a>
       @endforeach
 </body>
 </html>
