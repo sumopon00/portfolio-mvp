@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Album;
+use App\Models\AlbumMember;
 use App\Models\AlbumPost;
 use App\Models\Friendship;
 use App\Models\Post;
@@ -57,8 +58,13 @@ class PostController extends Controller
     public function create()
     {
         $albums = Album::where('user_id', auth()->id())->get();
+        $friendAlbumIds = AlbumMember::where('user_id', auth()->id())
+                                     ->pluck('album_id');
+        $friendAlbums = Album::whereIn('id', $friendAlbumIds)->get();
+        $allAlbums = $albums->merge($friendAlbums);
+
         $tags = Tag::where('user_id', auth()->id())->get();
-        return view('posts.create', compact('albums', 'tags'));
+        return view('posts.create', compact('allAlbums', 'tags'));
     }
 
     /**

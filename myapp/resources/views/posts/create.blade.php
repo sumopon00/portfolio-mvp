@@ -53,7 +53,7 @@
                   <label for="">アルバム</label>
                   <select name="album_id" id="">
                         <option value="0">選択しない</option>
-                        @foreach ($albums as $album)
+                        @foreach ($allAlbums as $album)
                             <option value="{{ $album->id }}">{{ $album->name }}</option>
                         @endforeach
                   </select>

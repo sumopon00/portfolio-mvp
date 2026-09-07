@@ -9,6 +9,14 @@
 <body>
       <h1>タグ管理</h1>
 
+      @if ($errors->any())
+            <div>
+                  @foreach ($errors->all() as $error)
+                        <p style="color:red;">{{ $error }}</p>
+                  @endforeach
+            </div>
+      @endif
+
       <form action="{{ route('tags.store') }}" method="POST">
             @csrf
             <input type="text" name="name" placeholder="新しいタグ名を入力">
