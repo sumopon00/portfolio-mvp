@@ -7,6 +7,7 @@ use App\Models\AlbumPost;
 use App\Models\Friendship;
 use App\Models\Post;
 use App\Models\PostTag;
+use App\Models\Tag;
 use App\Models\UserTag;
 use Illuminate\Http\Request;
 
@@ -56,7 +57,8 @@ class PostController extends Controller
     public function create()
     {
         $albums = Album::where('user_id', auth()->id())->get();
-        return view('posts.create', compact('albums'));
+        $tags = Tag::where('user_id', auth()->id())->get();
+        return view('posts.create', compact('albums', 'tags'));
     }
 
     /**
@@ -78,6 +80,15 @@ class PostController extends Controller
                 'album_id' => $request->album_id,
                 'post_id' => $post->id,
             ]);
+        }
+
+        if($request->tag_id) {
+            foreach($request->tag_id as $tagId) {
+                PostTag::create([
+                    'post_id' => $post->id,
+                    'tag_id' => $tagId,
+                ]);
+            }
         }
 
         return redirect()->route('posts.index');

@@ -24,12 +24,30 @@
 
             <div class="">
                   <label for="">公開範囲</label>
-                  <select name="visibility" id="">
+                  <select name="visibility" id="visibility" onchange="toggleTagSelect()">
                         <option value="all">友達全員</option>
                         <option value="tags">タグ指定</option>
                         <option value="private">自分のみ</option>
                   </select>
             </div>
+
+            <div id="tag-select" style="display:none;">
+                  <label>タグ選択</label>
+                  @foreach ($tags as $tag)
+                        <div>
+                              <input type="checkbox" name="tag_id[]" value="{{ $tag->id }}" id="tag_{{ $tag->id }}">
+                              <label for="tag_{{ $tag->id }}">{{ $tag->name }}</label>
+                        </div>
+                  @endforeach
+            </div>
+
+            <script>
+                  function toggleTagSelect() {
+                        const visibility = document.getElementById('visibility').value;
+                        const tagSelect = document.getElementById('tag-select');
+                        tagSelect.style.display = visibility === 'tags' ? 'block' : 'none';
+                  }
+            </script>
 
             <div class="">
                   <label for="">アルバム</label>
