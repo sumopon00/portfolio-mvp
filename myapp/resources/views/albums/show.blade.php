@@ -16,6 +16,14 @@
           </div>
       @endforeach
 
+      @if ($album->user_id == auth()->id())
+          <form action="{{ route('albums.destroy', $album->id) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit">削除</button>
+          </form>
+      @endif
+
       <a href="{{ route('albums.index') }}">戻る</a>
 </body>
 </html>

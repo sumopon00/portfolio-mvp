@@ -18,6 +18,14 @@
                   <p>{{ $myAlbum->created_at }}</p>
                   <a href="{{ route('albums.show', $myAlbum->id) }}">アルバム詳細</a>
             </div>
+
+            @if ($myAlbum->user_id == auth()->id())
+                  <form action="{{ route('albums.destroy', $myAlbum->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">削除</button>
+                  </form>
+            @endif
       @endforeach
 
       <h2>共有されたアルバム</h2>

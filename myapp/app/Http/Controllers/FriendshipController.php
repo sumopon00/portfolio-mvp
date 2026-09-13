@@ -75,4 +75,6 @@ class FriendshipController extends Controller
 
         return view('friends.search', compact('users'));
     }
+
+    public
 }

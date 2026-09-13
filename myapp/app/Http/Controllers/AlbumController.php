@@ -73,4 +73,17 @@ class AlbumController extends Controller
 
         return view('albums.show', compact('album', 'posts'));
     }
+
+    public function destroy(string $id)
+    {
+        $album = Album::find($id);
+
+        if ($album->user_id !== auth()->id()) {
+            return redirect()->route('albums.index');
+        }
+
+        $album->delete();
+
+        return redirect()->route('albums.index');
+    }
 }
