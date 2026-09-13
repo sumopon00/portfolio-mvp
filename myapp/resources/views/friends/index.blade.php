@@ -53,6 +53,12 @@
                   <input type="hidden" name="friend_id" value="{{ $friend->requester_id == auth()->id() ? $friend->receiver_id : $friend->requester_id }}">
                   <button type="submit">タグ設定</button>
             </form>
+
+            <form action="{{ route('friends.destroy', $friend->id) }}" method="POST">
+                  @csrf
+                  @method('DELETE')
+                  <button type="submit">削除</button>
+            </form>
       @endforeach
 </body>
 </html>

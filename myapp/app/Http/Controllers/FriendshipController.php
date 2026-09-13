@@ -76,5 +76,12 @@ class FriendshipController extends Controller
         return view('friends.search', compact('users'));
     }
 
-    public
+    public function destroy(string $id)
+    {
+        $friendship = Friendship::find($id);
+
+        $friendship->delete();
+
+        return redirect()->route('friends.index');
+    }
 }
