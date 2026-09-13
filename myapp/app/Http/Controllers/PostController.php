@@ -72,6 +72,10 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'image' => 'required|image|max:5120',
+        ]);
+
         $imagePath = $request->file('image')->store('posts', 'public');
 
         $post = Post::create([
