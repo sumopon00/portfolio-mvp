@@ -8,12 +8,12 @@
       @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-gray-50 min-h-screen">
-      <header class="bg-white border-t border-r border-l border-gray-200">
+      <header class="bg-white border-b border-gray-200">
                   <div class="max-w-lg mx-auto px-4 py-3">
                         <h1 class="text-center font-bold text-lg">AppName</h1>
                   </div>
       </header>
-      
+
       <main class="max-w-lg mx-auto pt-4">
             @foreach ($posts as $post)
                   <div class="bg-white border border-gray-200 mb-4">
