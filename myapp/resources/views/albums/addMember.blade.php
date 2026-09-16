@@ -23,11 +23,11 @@
                   <select name="friends" class="text-sm border border-gray-300 rounded px-2 py-1 w-full">
                         @foreach ($friends as $friend)
                               @php
-                                    $friendId = $friend->requester_id;
+                                    $friendId = $friend->requester_id == auth()->id() ? $friend->receiver_id : $friend->requester_id;
                                     $friendUser = \App\Models\User::find($friendId);
                               @endphp
-                        <option value="{{ $friendId }}">{{ $friendUser->name }}</option>
-                    @endforeach
+                              <option value="{{ $friendId }}">{{ $friendUser->name }}</option>
+                        @endforeach
                 </select>
             </div>
         </form>
