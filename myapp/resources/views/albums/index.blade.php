@@ -42,10 +42,12 @@
             <div class="bg-white border border-gray-200">
                   @foreach ($friendAlbums as $friendAlbum)
                         <div class="flex items-center justify-between px-4 py-3 border-b border-gray-200">
+                              <div>
                               <p class="text-sm font-semibold">{{ $friendAlbum->name }}</p>
                               <p class="text-xs text-gray-400">{{ $friendAlbum->created_at }}</p>
+                              </div>
+                              <a href="{{ route('albums.show', $friendAlbum->id) }}" class="text-sm text-blue-500">詳細</a>
                         </div>
-                        <a href="{{ route('albums.show', $friendAlbum->id) }}" class="text-sm text-blue-500">詳細</a>
                   @endforeach
             </div>
       </main>
