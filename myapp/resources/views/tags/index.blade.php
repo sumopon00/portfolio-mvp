@@ -7,7 +7,7 @@
       <title>タグ管理</title>
       @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-gray-50 min-h-screen">
+<body class="bg-gray-50 min-h-screen pb-16">
       <header class="bg-white border-b border-gray-200">
             <div class="max-w-lg mx-auto px-4 py-3">
                   <h1 class="text-center font-bold text-lg">タグ管理</h1>
@@ -44,5 +44,7 @@
                   @endforeach
             </div>
       </main>
+
+      <x-navigation />
 </body>
 </html>

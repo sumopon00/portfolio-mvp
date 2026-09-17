@@ -7,8 +7,8 @@
       <title>アルバム詳細</title>
       @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-gray-50 min-h-screen">
-      <header class="bg-white border-b border-gray-200">
+<body class="bg-gray-50 min-h-screen pb-16">
+        <header class="bg-white border-b border-gray-200">
           <div class="max-w-lg mx-auto px-4 py-3 relative">
               <a href="{{ route('albums.index') }}" class="text-blue-500 text-sm absolute left-4">← 戻る</a>
               <h1 class="font-bold text-lg text-center">{{ $album->name }}</h1>
@@ -20,9 +20,9 @@
                   </form>
               @endif
           </div>
-      </header>
+        </header>
 
-      <main class="max-w-lg mx-auto pt-4">
+    <main class="max-w-lg mx-auto pt-4">
         <div class="grid grid-cols-3 gap-1">
             @foreach ($posts as $post)
                 <div>
@@ -30,6 +30,8 @@
                 </div>
             @endforeach
         </div>
-</main>
+    </main>
+
+    <x-navigation />
 </body>
 </html>
