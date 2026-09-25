@@ -16,7 +16,7 @@
 
       <main class="max-w-lg mx-auto pt-4">
             @foreach ($posts as $post)
-                  <div class="bg-white border border-gray-200 mb-4">
+                  <div class="bg-white shadow-sm rounded-xl overflow-hidden mb-4">
                         <div class="flex items-center px-4 py-3">
                               <div class="w-8 h-8 rounded-full bg-gray-300 mr-3"></div>
                               <p class="font-semibold text-sm">{{ $post->user->name }}</p>
@@ -26,7 +26,7 @@
                         </a>
                         <div class="px-4 py-3">
                               <p class="text-sm">{{ $post->caption }}</p>
-                              <p class="text-xs text-gray-400 mt-1">{{ $post->created_at }}</p>
+                              <p class="text-xs text-gray-400 mt-1">{{ $post->created_at->diffForHumans() }}</p>
                         </div>
                   </div>
             @endforeach
