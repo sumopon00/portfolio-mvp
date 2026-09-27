@@ -23,22 +23,22 @@
                   </div>
             @endif
 
-            <div class="bg-white border border-gray-200 px-4 py-3 mb-4">
+            <div class="bg-white shadow-sm rounded-xl overflow-hidden px-4 py-3 mb-4">
                   <form action="{{ route('tags.store') }}" method="POST" class="flex gap-2">
                         @csrf
                         <input type="text" name="name" placeholder="新しいタグ名を入力" class="flex-1 border border-gray-300 rounded px-3 py-2 text-sm">
-                        <button type="submit" class="bg-black text-white text-sm px-4 py-2 rounded">作成</button>
+                        <button type="submit" class="bg-primary text-white text-sm px-4 py-2 rounded">作成</button>
                   </form>
             </div>
 
-            <div class="bg-white border border-gray-200">
+            <div class="bg-white shadow-sm rounded-xl overflow-hidden">
                   @foreach ($tags as $tag)
                         <div class="flex items-center justify-between px-4 py-3 border-b border-gray-200">
                         <p class="text-sm">{{ $tag->name }}</p>
                         <form action="{{ route('tags.destroy', $tag->id) }}" method="POST">
                               @csrf
                               @method('DELETE')
-                              <button type="submit" class="text-xs text-red-500">削除</button>
+                              <button type="submit" class="text-xs text-danger">削除</button>
                         </form>
                         </div>
                   @endforeach

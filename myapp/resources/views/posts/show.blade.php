@@ -16,11 +16,11 @@
       </header>
 
       <main class="max-w-lg mx-auto pt-4">
-            <div class="bg-white border border-gray-200">
+            <div class="bg-white shadow-sm rounded-xl overflow-hidden">
                   <img src="{{ asset('storage/' . $post->image_path) }}" class="w-full">
                   <div class="px-4 py-3">
                         <p class="text-sm">{{ $post->caption }}</p>
-                        <p class="text-xs text-gray-400 mt-1">{{ $post->created_at }}</p>
+                        <p class="text-xs text-gray-400 mt-1">{{ $post->created_at->diffForHumans() }}</p>
                   </div>
 
                   @if ($post->user_id == auth()->id())
@@ -30,7 +30,7 @@
                               <form action="{{ route('posts.destroy', $post->id) }}" method="POST" class="flex">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="text-sm text-red-500">削除</button>
+                                    <button type="submit" class="text-sm text-danger">削除</button>
                               </form>
                         </div>
                   @endif

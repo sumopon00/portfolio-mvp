@@ -14,7 +14,7 @@
             </div>
       </header>
       <main class="max-w-lg mx-auto pt-4">
-            <div class="bg-white border border-gray-200 mb-4 px-4 py-3">
+            <div class="bg-white shadow-sm rounded-xl overflow-hidden mb-4 px-4 py-3">
                   <h2 class="font-bold text-sm mb-3">友達申請</h2>
                   @foreach ($pendingRequests as $pendingRequest)
                         <div class="flex items-center justify-between py-2">
@@ -23,7 +23,7 @@
                                     <form action="{{ route('friends.accept', $pendingRequest->id) }}" method="POST">
                                           @csrf
                                           @method('PATCH')
-                                          <button type="submit" class="text-sm bg-black text-white px-3 py-1 rounded">承認</button>
+                                          <button type="submit" class="text-sm bg-primary text-white px-3 py-1 rounded">承認</button>
                                     </form>
 
                                     <form action="{{ route('friends.reject', $pendingRequest->id) }}" method="POST">
@@ -36,7 +36,7 @@
                   @endforeach
             </div>
 
-            <div class="bg-white border border-gray-200">
+            <div class="bg-white shadow-sm rounded-xl overflow-hidden">
                   <h2 class="font-bold text-sm px-4 py-3 border-b border-gray-200">友達</h2>
                   @foreach ($friends as $friend)
                         <div class="px-4 py-3 border-b border-gray-200">
@@ -65,7 +65,7 @@
                               <form action="{{ route('friends.destroy', $friend->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="text-xs text-red-500">削除</button>
+                                    <button type="submit" class="text-xs text-danger">削除</button>
                               </form>
                               </div>
 
