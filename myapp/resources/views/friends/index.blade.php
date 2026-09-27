@@ -9,8 +9,9 @@
 </head>
 <body class="bg-gray-50 min-h-screen pb-16">
       <header class="bg-white border-b border-gray-200">
-            <div class="max-w-lg mx-auto px-4 py-3">
+            <div class="max-w-lg mx-auto px-4 py-3 flex items-center justify-between">
                   <h1 class="text-center font-bold text-lg">友達</h1>
+                  <a href="{{ route('tags.index') }}" class="text-primary text-sm">タグ管理</a>
             </div>
       </header>
       <main class="max-w-lg mx-auto pt-4">

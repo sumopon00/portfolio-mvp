@@ -9,9 +9,9 @@
 <body class="bg-gray-50 min-h-screen">
       <header class="bg-white border-b border-gray-200">
             <div class="max-w-lg mx-auto px-4 py-3 relative">
-                  <a href="{{ route('albums.index') }}" class="text-blue-500 text-sm absolute left-4">スキップ</a>
+                  <a href="{{ route('albums.index') }}" class="text-primary text-sm absolute left-4">スキップ</a>
                   <h1 class="font-bold text-lg text-center">{{ $album->name }}</h1>
-                  <button form="member-form" type="submit" class="text-blue-500 text-sm font-bold absolute right-4 top-3">招待</button>
+                  <button form="member-form" type="submit" class="text-primary text-sm font-bold absolute right-4 top-3">招待</button>
             </div>
       </header>
 

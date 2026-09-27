@@ -10,7 +10,7 @@
 <body class="bg-gray-50 min-h-screen pb-16">
       <header class="bg-white border-b border-gray-200">
                   <div class="max-w-lg mx-auto px-4 py-3 relative">
-                        <a href="{{ route('posts.index') }}" class="text-blue-500 text-sm absolute left-4">戻る</a>
+                        <a href="{{ route('posts.index') }}" class="text-black text-sm mt-1 absolute left-4">戻る</a>
                         <h1 class="font-bold text-lg text-center">投稿</h1>
                   </div>
       </header>
@@ -25,7 +25,7 @@
 
                   @if ($post->user_id == auth()->id())
                         <div class="px-4 pb-3 flex gap-2">
-                              <a href="{{ route('posts.edit', $post->id) }}" class="text-sm text-blue-500">編集</a>
+                              <a href="{{ route('posts.edit', $post->id) }}" class="text-sm text-primary">編集</a>
 
                               <form action="{{ route('posts.destroy', $post->id) }}" method="POST" class="flex">
                                     @csrf

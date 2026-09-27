@@ -10,9 +10,9 @@
 <body class="bg-gray-50 min-h-screen pb-16">
       <header class="bg-white border-b border-gray-200">
             <div class="max-w-lg mx-auto px-4 py-3 relative">
-                  <a href="{{ route('albums.index') }}" class="text-blue-500 text-sm absolute left-4">キャンセル</a>
+                  <a href="{{ route('albums.index') }}" class="text-primary text-sm absolute left-4">キャンセル</a>
                   <h1 class="font-bold text-lg text-center">新規アルバム</h1>
-                  <button form="album-form" type="submit" class="text-blue-500 text-sm font-bold absolute right-4 top-3">作成</button>
+                  <button form="album-form" type="submit" class="text-primary text-sm font-bold absolute right-4 top-3">作成</button>
             </div>
       </header>
 

@@ -21,7 +21,7 @@
                               <div class="w-8 h-8 rounded-full bg-gray-300 mr-3"></div>
                               <p class="font-semibold text-sm">{{ $post->user->name }}</p>
                         </div>
-                        <a href="{{ route('posts.show', $post->id) }}" class="text-sm text-blue-500">
+                        <a href="{{ route('posts.show', $post->id) }}" class="text-sm text-primary">
                               <img src="{{ asset('storage/' . $post->image_path) }}" class="w-full">
                         </a>
                         <div class="px-4 py-3">

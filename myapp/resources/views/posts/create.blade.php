@@ -10,9 +10,9 @@
 <body class="bg-gray-50 min-h-screen pb-16">
       <header class="bg-white border-b border-gray-200">
             <div class="max-w-lg mx-auto px-4 py-3 relative">
-                  <a href="{{ route('posts.index') }}" class="text-danger text-sm absolute left-4">キャンセル</a>
+                  <a href="{{ route('posts.index') }}" class="text-danger text-sm absolute left-4 mt-1">キャンセル</a>
                   <h1 class="font-bold text-lg text-center">新規投稿</h1>
-                  <button form="post-form" type="submit" class="text-primary text-sm font-bold absolute right-4 top-3">シェア</button>
+                  <button form="post-form" type="submit" class="text-primary text-sm font-bold mt-1 absolute right-4 top-3">シェア</button>
             </div>
       </header>
 

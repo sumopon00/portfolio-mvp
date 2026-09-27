@@ -10,9 +10,9 @@
 <body class="bg-gray-50 min-h-screen pb-16">
       <header class="bg-white border-b border-gray-200">
             <div class="max-w-lg mx-auto px-4 py-3 relative">
-                  <a href="{{ route('posts.show', $post->id) }}" class="text-blue-500 text-sm absolute left-4">キャンセル</a>
+                  <a href="{{ route('posts.show', $post->id) }}" class="text-primary text-sm absolute left-4">キャンセル</a>
                   <h1 class="font-bold text-lg text-center">投稿を編集</h1>
-                  <button form="edit-form" type="submit" class="text-blue-500 text-sm font-bold absolute right-4 top-3">保存</button>
+                  <button form="edit-form" type="submit" class="text-primary text-sm font-bold absolute right-4 top-3">保存</button>
             </div>
       </header>
 
