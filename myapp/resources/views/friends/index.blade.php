@@ -20,12 +20,12 @@
                   <form action="{{ route('friends.index') }}" method="GET" class="flex gap-2">
                         @csrf
                         <input type="text" name="name" placeholder="ユーザー名で検索" class="flex-1 border border-gray-300 rounded px-3 py-2 text-sm">
-                        <button type="submit" class="bg-black text-white text-sm px-4 py-2 rounded">検索</button>
+                        <button type="submit" class="bg-primary text-white text-sm px-4 py-2 rounded">検索</button>
                   </form>
             </div>
 
             @if ($searchQuery)
-                  <div class="bg-white shadow-sm rounded-xl overflow-hidden mb-4 px-4 py-3">
+                  <div class="bg-white shadow-sm rounded-xl overflow-hidden mb-4">
                         @foreach ($users as $user)
                               <div class="flex items-center justify-between px-4 py-3 border-b border-gray-200">
                                     <div class="flex items-center">
