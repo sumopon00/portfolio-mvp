@@ -9,7 +9,7 @@ use App\Models\User;
 
 class FriendshipController extends Controller
 {
-    public function index() 
+    public function index(Request $request) 
     {
         $pendingRequests = Friendship::where('receiver_id', auth()->id())
                                      ->where('status', 'pending')
@@ -22,7 +22,16 @@ class FriendshipController extends Controller
         ->get();
         $tags = Tag::where('user_id', auth()->id())->get();
 
-        return view('friends.index', compact('pendingRequests', 'friends', 'tags'));
+        $users = [];
+        $searchQuery = $request->name;
+        if($searchQuery) {
+            $users = User::where('name', 'like', '%' . $searchQuery . '%')
+                         ->where('id', '!=', auth()->id())
+                         ->get();
+
+        }
+
+        return view('friends.index', compact('pendingRequests', 'friends', 'tags', 'users', 'searchQuery'));
     }
 
     public function store(User $user) 
@@ -62,19 +71,19 @@ class FriendshipController extends Controller
         return redirect()->route('friends.index');
     }
 
-    public function search(Request $request)
-    {
-        $users = [];
+    // public function search(Request $request)
+    // {
+    //     $users = [];
 
-        if($request->name) {
-            $users = User::where('name', 'like', '%' . $request->name . '%')
-                         ->where('id', '!=', auth()->id())
-                         ->get();
+    //     if($request->name) {
+    //         $users = User::where('name', 'like', '%' . $request->name . '%')
+    //                      ->where('id', '!=', auth()->id())
+    //                      ->get();
 
-        }
+    //     }
 
-        return view('friends.search', compact('users'));
-    }
+    //     return view('friends.search', compact('users'));
+    // }
 
     public function destroy(string $id)
     {

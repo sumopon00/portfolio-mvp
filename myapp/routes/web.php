@@ -24,7 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('posts', PostController::class);
 
     Route::get('/friends', [FriendshipController::class, 'index'])->name('friends.index');
-    Route::get('/friends/search', [FriendshipController::class, 'search'])->name('friends.search');
+    // Route::get('/friends/search', [FriendshipController::class, 'search'])->name('friends.search');
     Route::post('/friends/{user}', [FriendshipController::class, 'store'])->name('friends.store');
     Route::patch('/friends/{friendship}/accept', [FriendshipController::class, 'accept'])->name('friends.accept');
     Route::patch('/friends/{friendship}/reject', [FriendshipController::class, 'reject'])->name('friends.reject');

@@ -11,7 +11,7 @@
       <header class="bg-white border-b border-gray-200">
             <div class="max-w-lg mx-auto px-4 py-3">
                   <h1 class="font-bold text-lg text-center mb-3">ユーザー検索</h1>
-                  <form action="{{ route('friends.search') }}" method="GET" class="flex gap-2">
+                  <form action="{{ route('friends.index') }}" method="GET" class="flex gap-2">
                         <input type="text" name="name" placeholder="ユーザー名で検索" class="flex-1 border border-gray-300 rounded px-3 py-2 text-sm">
                         <button type="submit" class="bg-black text-white text-sm px-4 py-2 rounded">検索</button>
                   </form>
