@@ -47,6 +47,7 @@ class PostController extends Controller
                                 PostTag::whereIn('tag_id', $myTagIds)->pluck('post_id')
                                 );
                      })
+                     ->orderBy('created_at', 'desc')
                      ->get();
     
         return view('posts.index', compact('posts'));
