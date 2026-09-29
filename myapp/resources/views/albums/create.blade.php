@@ -20,11 +20,11 @@
             <form id="album-form" action="{{ route('albums.store') }}" method="POST">
                   @csrf
 
-                  <div class="bg-white border border-gray-200 mb-2 px-4 py-3">
+                  <div class="bg-white shadow-sm rounded-xl overflow-hidden mb-2 px-4 py-3">
                         <input type="text" name="name" placeholder="アルバム名を入力" class="w-full text-sm outline-none">
                   </div>
 
-                  <div class="bg-white border border-gray-200 mb-2 px-4 py-3">
+                  <div class="bg-white shadow-sm rounded-xl overflow-hidden mb-2 px-4 py-3">
                         <label class="text-sm font-semibold block mb-2">タイプ</label>
                         <select name="is_shared" class="text-sm border border-gray-300 rounded px-2 py-1 w-full">
                               <option value="0">個人</option>
