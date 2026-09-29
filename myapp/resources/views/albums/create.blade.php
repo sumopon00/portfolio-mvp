@@ -21,12 +21,12 @@
                   @csrf
 
                   <div class="bg-white shadow-sm rounded-xl overflow-hidden mb-2 px-4 py-3">
-                        <input type="text" name="name" placeholder="アルバム名を入力" class="w-full text-sm outline-none">
+                        <input type="text" name="name" placeholder="アルバム名を入力" class="w-full text-sm outline-none focus:outline-none">
                   </div>
 
                   <div class="bg-white shadow-sm rounded-xl overflow-hidden mb-2 px-4 py-3">
                         <label class="text-sm font-semibold block mb-2">タイプ</label>
-                        <select name="is_shared" class="text-sm border border-gray-300 rounded px-2 py-1 w-full">
+                        <select name="is_shared" class="text-sm border border-gray-200 rounded-lg px-3 py-2 w-full focus:ring-0 focus:outline-none focus:border-primary">
                               <option value="0">個人</option>
                               <option value="1">共有</option>
                         </select>
