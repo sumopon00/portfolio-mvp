@@ -124,8 +124,10 @@ class PostController extends Controller
         if ($post->user_id !== auth()->id()) {
             return redirect()->route('posts.index');
         }
+        $tags = Tag::where('user_id', auth()->id())->get();
+        $selectedTagIds = PostTag::where('post_id', $post->id)->pluck('tag_id')->toArray();
 
-        return view('posts.edit', compact('post'));
+        return view('posts.edit', compact('post', 'tags', 'selectedTagIds'));
     }
 
     /**
@@ -147,6 +149,17 @@ class PostController extends Controller
         $post->caption = $request->caption;
         $post->visibility = $request->visibility;
         $post->save();
+
+        PostTag::where('post_id', $post->id)->delete();
+
+        if ($request->tag_id) {
+            foreach ($request->tag_id as $tagId) {
+                PostTag::create([
+                    'post_id' => $post->id,
+                    'tag_id' => $tagId,
+                ]);
+            }
+        }
 
         return redirect()->route('posts.show', $post->id);
     }
