@@ -3,3 +3,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+      input[type="checkbox"] {
+            accent-color: #009D6D !important;
+      }
+
+      select:focus {
+            outline: none;
+            border-color: #009D6D;
+      }
+
+      textarea:focus {
+            outline: none;
+            border-color: #009D6D;
+      }
+}

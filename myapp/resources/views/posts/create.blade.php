@@ -10,7 +10,7 @@
 <body class="bg-gray-50 min-h-screen pb-16">
       <header class="bg-white border-b border-gray-200">
             <div class="max-w-lg mx-auto px-4 py-3 relative">
-                  <a href="{{ route('posts.index') }}" class="text-danger text-sm absolute left-4 mt-1">キャンセル</a>
+                  <a href="{{ route('posts.index') }}" class="text-gray-500 text-sm absolute left-4 mt-1">キャンセル</a>
                   <h1 class="font-bold text-lg text-center">新規投稿</h1>
                   <button form="post-form" type="submit" class="text-primary text-sm font-bold mt-1 absolute right-4 top-3">シェア</button>
             </div>
@@ -29,7 +29,7 @@
 
                   <div class="bg-white shadow-sm rounded-xl overflow-hidden mb-2 px-4 py-3">
                         <label class="text-sm font-semibold block mb-2">公開範囲</label>
-                        <select name="visibility" id="visibility" onchange="toggleTagSelect()" class="text-sm border border-gray-300 rounded px-2 py-1 w-full">
+                        <select name="visibility" id="visibility" onchange="toggleTagSelect()" class="text-sm border border-gray-200 rounded-lg px-3 py-2 w-full focus:ring-0 focus:border-primary">
                               <option value="all">友達全員</option>
                               <option value="tags">タグ指定</option>
                               <option value="private">自分のみ</option>
@@ -40,7 +40,7 @@
                         <label class="text-sm font-semibold block mb-2">タグ選択</label>
                         @foreach ($tags as $tag)
                               <div class="flex items-center gap-2 mb-1">
-                                    <input type="checkbox" name="tag_id[]" value="{{ $tag->id }}" id="tag_{{ $tag->id }}">
+                                    <input type="checkbox" class="accent-primary" name="tag_id[]" value="{{ $tag->id }}" id="tag_{{ $tag->id }}">
                                     <label for="tag_{{ $tag->id }}" class="text-sm">{{ $tag->name }}</label>
                               </div>
                         @endforeach
@@ -48,7 +48,7 @@
 
                   <div class="bg-white shadow-sm rounded-xl overflow-hidden mb-2 px-4 py-3">
                         <label class="text-sm font-semibold block mb-2">アルバム</label>
-                        <select name="album_id" class="text-sm border border-gray-300 rounded px-2 py-1 w-full">
+                        <select name="album_id" class="text-sm border border-gray-200 rounded-lg px-3 py-2 w-full focus:ring-0 focus:border-primary">
                               <option value="0">選択しない</option>
                               @foreach ($allAlbums as $album)
                                     <option value="{{ $album->id }}">{{ $album->name }}</option>
