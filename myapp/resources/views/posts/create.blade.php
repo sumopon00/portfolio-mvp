@@ -19,8 +19,15 @@
       <main class="max-w-lg mx-auto pt-4">
             <form id="post-form" action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
                   @csrf
-                  <div class="bg-white shadow-sm rounded-xl overflow-hidden mb-2 px-4 py-3">
-                        <input type="file" name="image" class="text-sm w-full">
+                  <div class="bg-white shadow-sm rounded-xl overflow-hidden mb-2">
+                        <label for="image" class="block px-4 py-8 text-center cursor-pointer">
+                              <div id="upload-text" class="text-gray-400 text-sm">📷 写真を選択</div>
+                              <div id="preview-area" class="hidden">
+                                    <img id="preview-image" src="" class="w-full rounded-lg">
+                                    <p class="text-xs text-danger mt-2" onclick="clearImage()">写真を削除</p>
+                              </div>
+                        </label>
+                        <input type="file" name="image" id="image" class="hidden" accept="image/*" onchange="previewImage(this)">
                   </div>
 
                   <div class="bg-white shadow-sm rounded-xl overflow-hidden mb-2 px-4 py-3">
@@ -63,6 +70,24 @@
                   const visibility = document.getElementById('visibility').value;
                   const tagSelect = document.getElementById('tag-select');
                   tagSelect.style.display = visibility === 'tags' ? 'block' : 'none';
+            }
+
+            function previewImage(input) {
+                  if (input.files && input.files[0]) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                              document.getElementById('preview-image').src = e.target.result;
+                              document.getElementById('preview-area').classList.remove('hidden');
+                              document.getElementById('upload-text').classList.add('hidden');
+                        }
+                        reader.readAsDataURL(input.files[0]);
+                  }
+            }
+
+            function clearImage() {
+                  document.getElementById('image').value = '';
+                  document.getElementById('preview-area').classList.add('hidden');
+                  document.getElementById('upload-text').classList.remove('hidden');
             }
       </script>
 

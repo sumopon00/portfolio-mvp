@@ -10,7 +10,7 @@
 <body class="bg-gray-50 min-h-screen pb-16">
       <header class="bg-white border-b border-gray-200">
                   <div class="max-w-lg mx-auto px-4 py-3 relative">
-                        <a href="{{ route('posts.index') }}" class="text-primary text-sm mt-1 absolute left-4">← 戻る</a>
+                        <a href="{{ route('posts.index') }}" class="text-gray-500 text-sm mt-1 absolute left-4">← 戻る</a>
                         <h1 class="font-bold text-lg text-center">投稿</h1>
                   </div>
       </header>
