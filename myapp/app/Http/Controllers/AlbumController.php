@@ -25,7 +25,13 @@ class AlbumController extends Controller
 
     public function create()
     {
-        return view('albums.create');
+        $friends = Friendship::where(function($query) {
+            $query->where('requester_id', auth()->id())
+                  ->orWhere('receiver_id', auth()->id());
+        })
+        ->where('status', 'accepted')
+        ->get();
+        return view('albums.create', compact('friends'));
     }
 
     public function store(Request $request) {
@@ -35,35 +41,40 @@ class AlbumController extends Controller
             'is_shared' => $request->is_shared,
         ]);
 
-        if($request->is_shared) {
-            return redirect()->route('albums.members', $album->id);
-        } else {
-            return redirect()->route(('albums.index'));
+        if($request->is_shared && $request->friend_id) {
+               foreach ($request->friend_id as $friendId) {
+                AlbumMember::create([
+                    'album_id' => $album->id,
+                    'user_id' => $friendId,
+                ]);
+            }
         }
+
+        return redirect()->route('albums.index');
     }
 
-    public function addMember(string $id)
-    {
-        $album = Album::find($id);
-        $friends = Friendship::where(function($query) {
-            $query->where('requester_id', auth()->id())
-                  ->orWhere('receiver_id', auth()->id());
-        })
-        ->where('status', 'accepted')
-        ->get();
+    // public function addMember(string $id)
+    // {
+    //     $album = Album::find($id);
+    //     $friends = Friendship::where(function($query) {
+    //         $query->where('requester_id', auth()->id())
+    //               ->orWhere('receiver_id', auth()->id());
+    //     })
+    //     ->where('status', 'accepted')
+    //     ->get();
 
-        return view('albums.addMember', compact('album', 'friends'));
-    }
+    //     return view('albums.addMember', compact('album', 'friends'));
+    // }
 
-    public function storeMember(Request $request, string $id)
-    {
-        AlbumMember::create([
-            'album_id' => $id,
-            'user_id' => $request->friends,
-        ]);
+    // public function storeMember(Request $request, string $id)
+    // {
+    //     AlbumMember::create([
+    //         'album_id' => $id,
+    //         'user_id' => $request->friends,
+    //     ]);
 
-        return redirect()->route('albums.show', $id);
-    }
+    //     return redirect()->route('albums.show', $id);
+    // }
 
     public function show(string $id)
     {

@@ -26,13 +26,36 @@
 
                   <div class="bg-white shadow-sm rounded-xl overflow-hidden mb-2 px-4 py-3">
                         <label class="text-sm font-semibold block mb-2">タイプ</label>
-                        <select name="is_shared" class="text-sm border border-gray-200 rounded-lg px-3 py-2 w-full focus:ring-0 focus:outline-none focus:border-primary">
+                        <select name="is_shared" id="visibility" onchange="toggleFriendSelect()" class="text-sm border border-gray-200 rounded-lg px-3 py-2 w-full focus:ring-0 focus:outline-none focus:border-primary">
                               <option value="0">個人</option>
                               <option value="1">共有</option>
                         </select>
                   </div>
+
+                  <div id="friend-select" class="bg-white shadow-sm rounded-xl overflow-hidden mb-2 px-4 py-3" style="display:none;">
+                        <label class="text-sm font-semibold block mb-2">友達選択</label>
+                        @foreach ($friends as $friend)
+                            <div class="flex items-center gap-2 mb-1">
+                                    @php
+                                          $friendId = $friend->requester_id == auth()->id() ? $friend->receiver_id : $friend->requester_id;
+                                          $friendUser = \App\Models\User::find($friendId);
+                                    @endphp
+
+                                    <input type="checkbox" class="accent-primary" name="friend_id[]" value="{{ $friendId }}">
+                                    <label>{{ $friendUser->name }}</label>
+                            </div>
+                        @endforeach
+                  </div>
             </form>
       </main>
+
+      <script>
+            function toggleFriendSelect() {
+                  const visibility = document.getElementById('visibility').value;
+                  const friendSelect = document.getElementById('friend-select');
+                  friendSelect.style.display = visibility === '1' ? 'block' : 'none';
+            }
+      </script>
 
       <x-navigation />
 </body>
