@@ -40,6 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('/albums', AlbumController::class);
     // Route::get('/albums/{album}/members', [AlbumController::class, 'addMember'])->name('albums.members');
     // Route::post('/albums/{album}/members', [AlbumController::class, 'storeMember'])->name('albums.members.store');
+
+    Route::get('/mypage', [ProfileController::class, 'mypage'])->name('mypage');
 });
 
 require __DIR__.'/auth.php';

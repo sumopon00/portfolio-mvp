@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Album;
+use App\Models\AlbumMember;
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -56,5 +60,20 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function mypage()
+    {
+        $user = auth()->user();
+
+        $myPosts = Post::where('user_id', auth()->id())->get();
+
+        $myAlbums = Album::where('user_id', auth()->id())->get();
+        
+        $friendAlbumIds = AlbumMember::where('user_id', auth()->id())
+                                     ->pluck('album_id');
+        $sharedAlbums = Album::whereIn('id', $friendAlbumIds)->get();
+
+        return view('profile.mypage', compact('user', 'myPosts', 'myAlbums', 'sharedAlbums'));
     }
 }
