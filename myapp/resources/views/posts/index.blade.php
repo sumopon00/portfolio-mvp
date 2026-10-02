@@ -20,6 +20,11 @@
                         <div class="flex items-center px-4 py-3">
                               <div class="w-8 h-8 rounded-full bg-gray-300 mr-3"></div>
                               <p class="font-semibold text-sm">{{ $post->user->name }}</p>
+                              <div class="flex gap-1 ml-auto">
+                                    @foreach ($post->tags as $tag)
+                                        <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full">{{ $tag->name }}</span>
+                                    @endforeach
+                              </div>
                         </div>
                         <a href="{{ route('posts.show', $post->id) }}" class="text-sm text-primary">
                               <img src="{{ asset('storage/' . $post->image_path) }}" class="w-full">
