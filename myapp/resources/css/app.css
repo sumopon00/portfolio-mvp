@@ -6,16 +6,16 @@
 
 @layer base {
       input[type="checkbox"] {
-            accent-color: #009D6D !important;
+            accent-color: #E07B54 !important;
       }
 
       select:focus {
             outline: none;
-            border-color: #009D6D;
+            border-color: #E07B54;
       }
 
       textarea:focus {
             outline: none;
-            border-color: #009D6D;
+            border-color: #E07B54;
       }
 }

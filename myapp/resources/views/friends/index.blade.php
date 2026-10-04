@@ -100,7 +100,7 @@
 
                                           <div class="flex gap-1 mt-1">
                                                 @foreach ($userTags as $userTag)
-                                                <span class="text-xs bg-gray-100 px-2 py-1 rounded-full">{{ $userTag->tag->name }}</span>
+                                                <span class="text-xs bg-primary/20 text-primary px-2 py-1 rounded-full">{{ $userTag->tag->name }}</span>
                                                 @endforeach
                                           </div>
                                     </div>
