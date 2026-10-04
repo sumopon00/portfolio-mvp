@@ -38,15 +38,37 @@
                         </button>
                   </div>
 
-                  <div id="content-posts" class="max-w-lg mx-auto pt-4">
-                        <div class="grid grid-cols-3 gap-1">
-                              @foreach ($myPosts as $myPost)
-                                  <div>
-                                    <a href="{{ route('posts.show', $myPost->id) }}">
-                                          <img src="{{ asset('storage/' . $myPost->image_path) }}" class="w-full aspect-square object-cover">
-                                    </a>
+                  <div id="content-posts" class="max-w-lg mx-auto py-4">
+                        <div class="flex items-center justify-between px-4 py-3">
+                              <a href="{{ route('mypage', ['year' => $showMonth->copy()->subMonth()->year, 'month' => $showMonth->copy()->subMonth()->month]) }}" class="text-lg text-gray-400">‹</a>
+                              <h3 class="font-bold text-sm">{{ $showMonth->year }}年 {{ $showMonth->month }}月</h3>
+                              <a href="{{ route('mypage', ['year' => $showMonth->copy()->addMonth()->year, 'month' => $showMonth->copy()->addMonth()->month]) }}" class="text-lg text-gray-400">›</a>
+                        </div>
+                        <div class="grid grid-cols-7 gap-1">
+                              <div class="text-center text-xs text-danger py-1">日</div>
+                              <div class="text-center text-xs text-gray-400 py-1">月</div>
+                              <div class="text-center text-xs text-gray-400 py-1">火</div>
+                              <div class="text-center text-xs text-gray-400 py-1">水</div>
+                              <div class="text-center text-xs text-gray-400 py-1">木</div>
+                              <div class="text-center text-xs text-gray-400 py-1">金</div>
+                              <div class="text-center text-xs text-gray-400 py-1">土</div>
+                        </div>
+                        <div class="grid grid-cols-7 gap-1 px-4">
+                              @for ($i = 0; $i < $firstDayOfWeek; $i++)
+                                  <div></div>
+                              @endfor
+
+                              @for ($i = 1; $i <= $daysInMonth; $i++)
+                                  <div class="aspect-square rounded-lg overflow-hidden">
+                                    @if (isset($postsByDay[$i]))
+                                        <img src="{{ asset('storage/' . $postsByDay[$i]->first()->image_path) }}" class="w-full h-full object-cover">
+                                    @else
+                                        <div class="w-full h-full bg-gray-100 flex items-center justify-center">
+                                          <span class="text-xs text-gray-400">{{ $i }}</span>
+                                        </div>
+                                    @endif
                                   </div>
-                              @endforeach
+                              @endfor
                         </div>
                   </div>
 

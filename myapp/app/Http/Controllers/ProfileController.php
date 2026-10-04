@@ -7,6 +7,7 @@ use App\Models\Album;
 use App\Models\AlbumMember;
 use App\Models\Post;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -62,18 +63,28 @@ class ProfileController extends Controller
         return Redirect::to('/');
     }
 
-    public function mypage()
+    public function mypage(Request $request)
     {
+        $now = Carbon::now();
+        $year = $request->year ?? $now->year;
+        $month = $request->month ?? $now->month;
+        $showMonth = Carbon::create($year, $month, 1);
+        $daysInMonth = $showMonth->daysInMonth;
+        $firstDayOfWeek = $showMonth->startOfMonth()->dayOfWeek;
+
         $user = auth()->user();
-
-        $myPosts = Post::where('user_id', auth()->id())->get();
-
+        $myPosts = Post::where('user_id', auth()->id())
+                       ->whereYear('created_at', $year)
+                       ->whereMonth('created_at', $month)
+                       ->get();
+        $postsByDay = $myPosts->groupBy(function($post) {
+            return $post->created_at->day;
+        });
         $myAlbums = Album::where('user_id', auth()->id())->get();
-        
         $friendAlbumIds = AlbumMember::where('user_id', auth()->id())
-                                     ->pluck('album_id');
+                             ->pluck('album_id');
         $sharedAlbums = Album::whereIn('id', $friendAlbumIds)->get();
 
-        return view('profile.mypage', compact('user', 'myPosts', 'myAlbums', 'sharedAlbums'));
+        return view('profile.mypage', compact('now', 'showMonth', 'daysInMonth', 'firstDayOfWeek', 'user', 'myPosts', 'postsByDay', 'myAlbums', 'sharedAlbums'));
     }
 }
