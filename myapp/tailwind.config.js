@@ -15,8 +15,9 @@ export default {
                 sans: ['Noto Sans JP', ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                primary:'#009D6D',
-                danger: '#E63A59',
+                primary:'#E07B54',
+                danger: '#B84A4A',
+                warm: '#FAF8F5',
             }
         },
     },

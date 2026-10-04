@@ -7,7 +7,7 @@
       <title>投稿一覧</title>
       @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-gray-50 min-h-screen pb-16">
+<body class="bg-warm min-h-screen pb-16">
       <header class="bg-white border-b border-gray-200">
                   <div class="max-w-lg mx-auto px-4 py-3">
                         <h1 class="text-center font-bold text-lg text-primary">AppName</h1>
@@ -22,7 +22,7 @@
                               <p class="font-semibold text-sm">{{ $post->user->name }}</p>
                               <div class="flex gap-1 ml-auto">
                                     @foreach ($post->tags as $tag)
-                                        <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full">{{ $tag->name }}</span>
+                                        <span class="text-xs bg-primary/20 text-primary font-medium px-2 py-1 rounded-full">{{ $tag->name }}</span>
                                     @endforeach
                               </div>
                         </div>
